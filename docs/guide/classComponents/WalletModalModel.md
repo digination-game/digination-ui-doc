@@ -1,5 +1,5 @@
 <h1 align="center">
- Digi Wallet Modal Model
+  Wallet Modal Model
 </h1>
 
 <h3 align="center">
@@ -23,8 +23,17 @@
 
 ## 🎉 Preview
 
+- Connect
+<h1 align="center">
+    <img :src="$withBase('/img/classComponents/digi-wallet-modal-model/digi-wallet-modal-model-1.png')" alt="logo">
+</h1>
+- Select wallet
 <h1 align="center">
     <img :src="$withBase('/img/classComponents/digi-wallet-modal-model/digi-wallet-modal-model.png')" alt="logo">
+</h1>
+- Disconnect
+<h1 align="center">
+    <img :src="$withBase('/img/classComponents/digi-wallet-modal-model/digi-wallet-modal-model-2.png')" alt="logo">
 </h1>
 
 ## 💻 example
@@ -33,74 +42,148 @@ https://daudxu.github.io/dapp-wallet-modal/
 
 ## 🚩 Usage
 
-### 1️⃣ add dapp-wallet-modal to your Dapp as follows
+### 1️⃣ add Wallet Modal Model to your Dapp as follows
 
-```js
-import Web3 from "web3";
-import ethWalletModal from "dapp-wallet-modal";
+```vue
+<template>
+  <div class="warp">
+    <div>
+      <digi-button
+        type="primary"
+        v-show="provider === ''"
+        @click="handleClickConnect()"
+        >Connect</digi-button
+      >
+      <digi-button
+        type="warning"
+        v-show="provider"
+        @click="handleClickDisconnect()"
+        >Disconnect</digi-button
+      >
+    </div>
+    <div class="cl-owner">
+      {{ owner }}
+    </div>
+  </div>
+</template>
 
-import detectEthereumProvider from '@metamask/detect-provider';
+<script>
+import Bean from '../assets/Bean.gif'
 
-import WalletConnectProvider from "@walletconnect/web3-provider";
+import WalletConnectLogo from '../assets/logos/walletconnect-circle.svg'
 
-import CoinbaseWalletSDK from '@coinbase/wallet-sdk';
+import MetaMaskLogo from '../assets/logos/metamask.svg'
 
-const  providerOptions = {
-        logo: LOGO,
-        maskColor:'rgb(30, 30, 30, 0.8)',
-        bgColor:'#363636',
-        borderColor:'#faba30',
+import CoinbaseLogo from '../assets/logos/coinbase.svg'
+
+import BlockWalletLogo from '../assets/logos/BlockWallet.png'
+
+import WalletConnectProvider from '@walletconnect/web3-provider'
+
+import detectEthereumProvider from '@metamask/detect-provider'
+
+import CoinbaseWalletSDK from '@coinbase/wallet-sdk'
+
+const CHAINID = 4
+
+export default {
+  name: 'Home',
+  data() {
+    return {
+      walletModalModel: '',
+      provider: '',
+      providerOptions: {
+        logo: Bean,
+        owner: '',
+        maskColor: 'rgb(30, 30, 30, 0.8)',
+        bgColor: '#363636',
+        borderColor: '#faba30',
         chainId: CHAINID,
         walletOptions: {
           metamask: {
             displayView: {
-              logo: MetaMaskLogo, // your Wallet logo
-              name: "MetaMask", // your Wallet name
+              logo: MetaMaskLogo,
+              name: 'MetaMask',
             },
             options: {
-              drive: detectEthereumProvider,  //  drive package
-            }
+              drive: detectEthereumProvider,
+            },
           },
           walletconnect: {
             displayView: {
-              logo: WalletConnectLogo,  // your Wallet logo
-              name: "WalletConnect", // your Wallet name
+              logo: WalletConnectLogo,
+              name: 'WalletConnect',
             },
             options: {
-              drive: WalletConnectProvider,  //  drive package
+              drive: WalletConnectProvider,
               rpc: {
-                1: 'https://mainnet.infura.io/v3/9aa3d95b3bc440fa88ea12eaa414516161',
-                4: 'https://rinkeby.infura.io/v3/9aa3d95b3bc440fa88ea12ea221a4456161'
+                1: 'https://mainnet.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161',
+                4: 'https://rinkeby.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161',
               },
               chainId: CHAINID,
-              bridge: 'https://bridge.walletconnect.org'
-            }
+              bridge: 'https://bridge.walletconnect.org',
+            },
           },
           coinbase: {
             displayView: {
-              logo: CoinbaseLogo,  // your Wallet logo
-              name: "Coinbase Wallet",  // your Wallet name
+              logo: CoinbaseLogo,
+              name: 'Coinbase Wallet',
             },
             options: {
-              drive: CoinbaseWalletSDK, //  drive package
-              infuraId: '9aa3d95b3bxxxc440fa88ea12eaa4456161',
+              drive: CoinbaseWalletSDK,
+              infuraId: '9aa3d95b3bc440fa88ea12eaa4456161',
               chainId: CHAINID,
               appName: 'Digi',
               appLogoUrl: WalletConnectLogo,
-              darkMode: false
-            }
+              darkMode: false,
+            },
           },
-          .....
-        }
-
+          blockmallet: {
+            displayView: {
+              logo: BlockWalletLogo,
+              name: 'BlockWallet',
+            },
+            options: {},
+          },
+        },
+      },
+    }
+  },
+  mounted() {
+    this.walletModalModel = new this.$WalletModalModel(this.providerOptions)
+    const walletType = sessionStorage.getItem('injected')
+    var _this = this
+    if (walletType && typeof walletType !== 'undefined') {
+      setTimeout(function () {
+        _this.handleClickConnect()
+      }, 1000)
+    }
+  },
+  methods: {
+    async handleClickConnect() {
+      var provider = await this.walletModalModel.connect()
+      if (provider) {
+        this.provider = provider
+        console.log('provider', provider)
+        this.owner = provider.selectedAddress
       }
+    },
+    async handleClickDisconnect() {
+      this.walletModalModel.disconnect(this.provider)
+      this.provider = ''
+    },
+  },
+}
+</script>
+<style scoped lang="scss">
+.cl-owner {
+  margin-top: 30px;
+}
 
-const walletModal = new ethWalletModal(providerOptions);
-
-const provider = await walletModal.connect();
-
-const web3 = new Web3(provider);
-
+.warp {
+  text-align: center;
+}
+</style>
 ```
 
 ## 📝 Options
@@ -204,7 +287,7 @@ Official Doc: <a href="https://docs.cloud.coinbase.com/wallet-sdk/docs/installin
 
 Official Doc: <a href="https://help.blockwallet.io/hc/en-us/articles/4437032129169-How-to-Integrate-BlockWallet-With-Your-DApp" target="view_window"> View Doc </a>
 
-```
+```js
          blockmallet: {
             displayView: {
             logo: 'https://raw.org/blockmallet.svg' // The logo address you define to display your wallet.
@@ -217,7 +300,7 @@ Official Doc: <a href="https://help.blockwallet.io/hc/en-us/articles/44370321291
 
 Official Doc: <a href="https://docs.fortmatic.com/" target="view_window"> View Doc </a>
 
-```
+```js
          fortmatic: {
             displayView: {
             logo: 'https://raw.org/fortmatic.svg' // The logo address you define to display your wallet.
@@ -237,7 +320,7 @@ Official Doc: <a href="https://docs.fortmatic.com/" target="view_window"> View D
 
 Official Doc <a href="https://docs.binance.org/smart-chain/wallet/wallet_api.html" target="view_window"> View Doc </a>
 
-```
+```js
          binancechainwallet: {
             displayView: {
             logo: 'https://raw.org/binancechainwallet.svg' // The logo address you define to display your wallet.
@@ -251,7 +334,7 @@ Official Doc <a href="https://docs.binance.org/smart-chain/wallet/wallet_api.htm
 
 Official Doc: <a href="https://docs.portis.io/#/" target="view_window"> View Doc </a>
 
-```
+```js
          portis: {
             displayView: {
             logo: 'https://raw.org/portis.svg' // The logo address you define to display your wallet.
@@ -298,7 +381,7 @@ Official Doc: <a href="https://medium.com/gitcoin/burner-modules-c6737cf06fe" ta
 
 Progect address: <a href="https://github.com/burner-wallet/burner-connect-provider" target="view_window"> View Doc </a>
 
-```
+```js
          burnerconnect: {
             displayView: {
             logo: 'https://raw.org/burnerconnect.svg'  // The logo address you define to display your wallet.
@@ -316,7 +399,7 @@ Progect address: <a href="https://github.com/burner-wallet/burner-connect-provid
 
 Official Doc: <a href="https://docs.tor.us/integration-builder/?b=wallet&chain=Ethereum&lang=Vue" target="view_window"> View Doc</a>
 
-```
+```js
          torus: {
             displayView: {
             logo: 'https://raw.org/torus.svg'  // The logo address you define to display your wallet.
@@ -333,7 +416,7 @@ Official Doc: <a href="https://docs.tor.us/integration-builder/?b=wallet&chain=E
 
 Official Doc: <a href="https://docs.authereum.com/web3-provider" target="view_window"> View Doc </a>
 
-```
+```js
          authereum: {
             displayView: {
             logo: 'https://raw.org/authereum.svg'  // The logo address you define to display your wallet.
@@ -395,10 +478,6 @@ provider.on('disconnect', (error: { code: number, message: string }) => {
   console.log(error)
 })
 ```
-
-## 🎾 Plugins
-
-web3Model
 
 ## 🎾 Features
 

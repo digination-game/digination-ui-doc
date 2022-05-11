@@ -48,12 +48,12 @@ module.exports = [
     collapsable: true,
     children: [
       {
-        title: 'digi Wallet Modal Model',
-        path: '/guide/classComponents/DigiWalletModalModel',
+        title: 'Wallet Modal Model',
+        path: '/guide/classComponents/WalletModalModel',
       },
       {
-        title: 'digi Web3 Model',
-        path: '/guide/classComponents/DigiWeb3Model',
+        title: 'Web3 Model',
+        path: '/guide/classComponents/Web3Model',
       },
     ],
   },

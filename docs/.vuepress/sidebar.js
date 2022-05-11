@@ -1,4 +1,3 @@
 module.exports = {
-	'/guide/': require('../guide/sidebar'),
-}	
-
+  '/guide/': require('../guide/sidebar'),
+}
