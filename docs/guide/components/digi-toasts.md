@@ -15,26 +15,11 @@
 ```vue
 <template>
   <div>
-    <div class="item">
-      <digi-button type="info" @click="handleClickInfo">button</digi-button>
-      <digi-button type="success" @click="handleClickSuccess"
-        >button</digi-button
-      >
-
-      <digi-button type="warning" @click="handleClickWarning"
-        >button</digi-button
-      >
-      <digi-button type="danger" @click="handleClickError">button</digi-button>
-    </div>
     <digi-toasts></digi-toasts>
   </div>
 </template>
 <script>
 export default {
-  name: 'Home',
-  data() {
-    return {}
-  },
   methods: {
     handleClickInfo() {
       this.$toast.info('this is info message')
