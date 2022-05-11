@@ -13,9 +13,10 @@ yarn add @digination/digination-ui
 ```
 
 - Step 2
+  > In `src/main.js` Introducing `@digination/digination-ui` into JS file
 
 ```
-//
+
 import DiginationUI from '@digination/digination-ui'
 
 import '@digination/digination-ui/lib/digination-ui.css'

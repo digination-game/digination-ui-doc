@@ -1,3 +1,3 @@
 <h1 align="center">
-   digi-lands-tile-map Vue Component
+   digi-button Vue Component
 </h1>

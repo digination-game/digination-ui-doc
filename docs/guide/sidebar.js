@@ -18,12 +18,28 @@ module.exports = [
     collapsable: true,
     children: [
       {
-        title: 'digi-lands-tile-map',
-        path: '/guide/components/digi-lands-tile-map',
+        title: 'digi-button',
+        path: '/guide/components/digi-button',
+      },
+      {
+        title: 'digi-toasts',
+        path: '/guide/components/digi-toasts',
+      },
+      {
+        title: 'digi-loading',
+        path: '/guide/components/digi-loading',
+      },
+      {
+        title: 'digi-dialog',
+        path: '/guide/components/digi-dialog',
       },
       {
         title: 'digi-model-viewer',
         path: '/guide/components/digi-model-viewer',
+      },
+      {
+        title: 'digi-lands-tile-map',
+        path: '/guide/components/digi-lands-tile-map',
       },
     ],
   },
