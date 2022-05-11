@@ -1,8 +1,6 @@
 # Introduction
 
-
- **Digination UI** is a simple block chain oriented component library based on Vue 
-
+**Digination UI** is a simple block chain oriented component library based on Vue
 
 ## Features
 

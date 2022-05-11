@@ -1,26 +1,30 @@
-const { title } = require("../.vuepress/config");
+const { title } = require('../.vuepress/config')
 
 module.exports = [
   {
-    title: "Introduction",
+    title: 'Introduction',
+    collapsable: true,
+    children: [{ title: 'Motivation', path: '/guide/introduction/Motivation' }],
+  },
+  {
+    title: 'Getting Started',
     collapsable: true,
     children: [
-      { title: "Motivation", path: "/guide/introduction/Motivation" },
+      { title: 'Installation', path: '/guide/gettingstarted/Installation' },
     ],
   },
   {
-    title: "Getting Started", 
+    title: 'Components',
     collapsable: true,
     children: [
-      { title: "Installation", path: "/guide/gettingstarted/Installation" },
+      {
+        title: 'digi-lands-tile-map',
+        path: '/guide/components/digi-lands-tile-map',
+      },
+      {
+        title: 'digi-model-viewer',
+        path: '/guide/components/digi-model-viewer',
+      },
     ],
   },
-  {
-    title: "Components",
-    collapsable: true,
-    children: [
-      { title: "digi-lands-tile-map", path: "/guide/components/digi-lands-tile-map" },
-      { title: "digi-model-viewer", path: "/guide/components/digi-model-viewer" },
-    ],
-  }
-];
+]
