@@ -1,32 +1,28 @@
 <h1 align="center">
-    digi-model-viewer Vue  Component
+    digi-model-viewer
 </h1>
 
-[![npm][npm]][npm-url]
-[![node][node]][node-url]
-![npm](https://img.shields.io/npm/dt/vue-model-viewer?label=NPM%20downloads)
+### Preview
 
+<h1 align="center">
+    <img :src="$withBase('/img/components/digi-model-viewer/digi-model-viewer.png')" alt="logo">
+</h1>
 
 ## example
 
 - https://daudxu.github.io/vue-model-viewer/
 
-
-
 ## Usage
-
 
 ```
  page use
 
-      <vue-model-viewer ref="modelViewerRef"
+      <digi-model-viewer ref="modelViewerRef"
                         :viewWidth="viewWidth"
                         :viewHeight="viewHeight">
-      </vue-model-viewer>
+      </digi-model-viewer>
 
 ```
-
-
 
 ## demo
 
@@ -60,10 +56,10 @@ export default {
   },
   data () {
     return {
-      modelAddress: '',
-      viewWidth: '500px',
-      viewHeight: '500px',
-      poster: poster,
+      modelAddress: '',  //your Model address
+      viewWidth: '500px',   //your Model view Width
+      viewHeight: '500px', //your Model view Height
+      poster: poster,  //your Model poster  (loading image)
       listglb: [
         { 'url': './1.glb' },
         { 'url': './2.glb' },
@@ -110,22 +106,18 @@ a {
 
 ```
 
-Click to view [example](../../examples/vuemodelviewer.vue)。
-
 ## Options
 
-| configuration item | value type | description                                                 |
-| ------------------ | ---------- | ----------------------------------------------------------- |
-| modelAddress          | String     | model url Address                                   |
-| poster          | String     | model poster loading image                                    |
-| viewWidth          | String     | model width （unit： px,em,rem,vw ...）                                    |
-| viewHeight         | String     | model high （unit：  px,em,rem,vh ...）                                     |
-| isAutoPlay         | Boolean    | isAutoPlay true or flase |
-| isDisableZoom      | Boolean    | isDisableZoom true or flase |
-| modelId            | String   |  default  'viewer-display'|
-| modelClass            | String   |  default  'viewer-display'|
-
-
+| configuration item | value type | description                             |
+| ------------------ | ---------- | --------------------------------------- |
+| modelAddress       | String     | model url Address                       |
+| poster             | String     | model poster loading image              |
+| viewWidth          | String     | model width （unit： px,em,rem,vw ...） |
+| viewHeight         | String     | model high （unit： px,em,rem,vh ...）  |
+| isAutoPlay         | Boolean    | isAutoPlay true or flase                |
+| isDisableZoom      | Boolean    | isDisableZoom true or flase             |
+| modelId            | String     | default 'viewer-display'                |
+| modelClass         | String     | default 'viewer-display'                |
 
 ## Features
 
