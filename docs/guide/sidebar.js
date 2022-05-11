@@ -43,4 +43,18 @@ module.exports = [
       },
     ],
   },
+  {
+    title: 'Class Components',
+    collapsable: true,
+    children: [
+      {
+        title: 'digiWalletModalModel',
+        path: '/guide/classComponents/DigiWalletModalModel',
+      },
+      {
+        title: 'digiWeb3Model',
+        path: '/guide/classComponents/DigiWeb3Model',
+      },
+    ],
+  },
 ]
